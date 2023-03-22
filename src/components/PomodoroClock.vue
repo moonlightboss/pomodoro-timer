@@ -16,7 +16,7 @@
                      >
                      <h1 class="time">{{ displayMinutes }}:{{ displaySeconds }}</h1>
                      <div class="button-group">
-                        <v-btn @click="start" color="primary">
+                        <v-btn @click="start"  color="primary">
                             <v-icon left small>mdi-play-circle-outline</v-icon>
                             Start
                         </v-btn>
@@ -24,7 +24,7 @@
                             <v-icon left small>mdi-stop-circle-outline</v-icon>
                             Stop
                         </v-btn>
-                        <v-btn @click="reset">
+                        <v-btn @click="reset" :disabled="timerIsRunnin">
                             <v-icon left small>mdi-restart</v-icon>
                             Reset
                         </v-btn>
@@ -38,6 +38,7 @@
 export default{
     data(){
         return{
+            timerIsRunnin:false,
             timerInstance: null,
             totalSeconds: 25 * 60,
             timerType:0,
@@ -63,11 +64,13 @@ export default{
         },
         start(){
             this.stop()
+            this.timerIsRunnin = true
             this.timerInstance = setInterval(()=>{
                 this.totalSeconds -=1
             },1000)
         },
         stop(){
+            this.timerIsRunnin = false
             clearInterval(this.timerInstance)
         },
         reset(){
