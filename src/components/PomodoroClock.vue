@@ -62,6 +62,7 @@ export default{
             return time.toString()
         },
         start(){
+            this.stop()
             this.timerInstance = setInterval(()=>{
                 this.totalSeconds -=1
             },1000)
